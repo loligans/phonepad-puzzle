@@ -1,0 +1,9 @@
+.DS_Store
+
+typescript/node_modules
+typescript/out
+
+c++/.cmake/*
+!c++/.cmake/CMakeLists.txt
+c++/.vscode/symbols
+c++/bin

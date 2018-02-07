@@ -1,0 +1,23 @@
+{
+  "name": "phonepad-puzzlejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile": "gulp build"
+  },
+  "author": "Ethan Lindemann-Michael",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^9.4.0",
+    "babel-core": "^6.26.0",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^7.0.1",
+    "gulp-clean": "^0.4.0",
+    "gulp-sourcemaps": "^2.6.4",
+    "gulp-typescript": "^3.2.4",
+    "typescript": "^2.6.2"
+  }
+}
