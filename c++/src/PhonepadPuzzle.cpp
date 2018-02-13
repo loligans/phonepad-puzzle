@@ -10,20 +10,40 @@ bool nextDigit(int num, list<int>& digits, bool canCross);
 bool isSolution(list<int>& digits);
 int concatInt(int a, int b, int c = -1);
 
-// vectors let us initialize jagged arrays
+// The Phonepad containing adjacent digits
 const vector<vector<int>> phonepad = { 
-	{ 7, 8, 9 }, //0
-	{ 2, 4, 5 }, //1
-	{ 1, 3, 4, 5, 6 }, //2
-	{ 2, 5, 6 }, //3
-	{ 1, 2, 5, 7, 8 }, //4
-	{ 1, 2, 3, 4, 6, 7, 8, 9 }, //5
-	{ 2, 3, 5, 8, 9 }, //6
-	{ 4, 5, 8, 0 }, //7
-	{ 4, 5, 6, 7, 9, 0 }, //8
-	{ 5, 6, 8, 0 } //9
+	/*0*/ { 7, 8, 9 },
+	/*1*/ { 2, 4, 5 },
+	/*2*/ { 1, 3, 4, 5, 6 },
+	/*3*/ { 2, 5, 6 },
+	/*4*/ { 1, 2, 5, 7, 8 },
+	/*5*/ { 1, 2, 3, 4, 6, 7, 8, 9 },
+	/*6*/ { 2, 3, 5, 8, 9 },
+	/*7*/ { 4, 5, 8, 0 },
+	/*8*/ { 4, 5, 6, 7, 9, 0 },
+	/*9*/ { 5, 6, 8, 0 }
 };
 
+//----------------------------------------------------------------------------
+// Function: solvePuzzle()
+// Title: Solve Puzzle
+// Description:
+//   Recursively adds 9 adjacent digits to a collection and then 
+//   tests for a solution.
+//
+// Programmer: Ethan Lindemann-Michael
+// Date: 9/Feb/2018
+// Version: 0.1
+//
+// Called By: main()
+//
+// Parameters: 
+// int chosenNumber - The next digit to include in the solution.
+// list<int>& digits - The collection of digits that will contain the solution.
+// bool canCross - Whether digits can cross each other.
+// 
+// Returns:	bool
+//----------------------------------------------------------------------------
 bool solvePuzzle(int chosenNumber, list<int>& digits, bool canCross)
 {
 	digits.push_back(chosenNumber);
@@ -51,6 +71,27 @@ bool solvePuzzle(int chosenNumber, list<int>& digits, bool canCross)
 	return false;
 }
 
+//----------------------------------------------------------------------------
+// Function: digitsCross()
+// Title: Digits Cross
+// Description:
+//   Checks if the last 4 digits in a collection cross.
+//
+// Programmer: Ethan Lindemann-Michael
+// Date: 9/Feb/2018
+// Version: 0.1
+//
+// Calls:
+// isSolution()
+// nextDigit()
+//
+// Called By: solvePuzzle()
+//
+// Parameters: 
+// list<int>& digits - The collection of digits to check.
+// 
+// Returns:	bool
+//----------------------------------------------------------------------------
 bool digitsCross(list<int>& digits)
 {
 	// Testing requires 4 ints on the list
@@ -70,6 +111,28 @@ bool digitsCross(list<int>& digits)
 	return cross;
 }
 
+//----------------------------------------------------------------------------
+// Function: nextDigit()
+// Title: Next Digit
+// Description:
+//   Adds another digit to the collection then tries to solve the puzzle.
+//
+// Programmer: Ethan Lindemann-Michael
+// Date: 9/Feb/2018
+// Version: 0.1
+//
+// Calls:
+// solvePuzzle()
+//
+// Called By: solvePuzzle()
+//
+// Parameters: 
+// int num - The next digit to add into the collection.
+// list<int>& digits - The collection of digits to check.
+// bool canCross - Whether digits can cross each other.
+//
+// Returns:	bool
+//----------------------------------------------------------------------------
 bool nextDigit(int num, list<int>& digits, bool canCross)
 {
 	// makes sure the list doesn't contain duplicate digits
@@ -88,6 +151,27 @@ bool nextDigit(int num, list<int>& digits, bool canCross)
 	return false;
 }
 
+//----------------------------------------------------------------------------
+// Function: isSolution()
+// Title: Check Solution
+// Description:
+//   Verifies the combined first 3-digits plus the combined second 3-digits 
+//   equals the combined last 3-digits.
+//
+// Programmer: Ethan Lindemann-Michael
+// Date: 9/Feb/2018
+// Version: 0.1
+//
+// Calls:
+// concatInt()
+//
+// Called By: solvePuzzle()
+//
+// Parameters: 
+// list<int>& digits - The collection of digits to check.
+//
+// Returns:	bool
+//----------------------------------------------------------------------------
 bool isSolution(list<int>& digits)
 {
 	// Grabs each digit from the list
@@ -110,6 +194,28 @@ bool isSolution(list<int>& digits)
 	return false;
 }
 
+//----------------------------------------------------------------------------
+// Function: concatInt()
+// Title: Combine Integer
+// Description:
+//   Combines an integer into another integer. ie: 1 and 2 would become 12. 
+//
+// Programmer: Ethan Lindemann-Michael
+// Date: 9/Feb/2018
+// Version: 0.1
+//
+// Calls:
+// concatInt()
+//
+// Called By: isSolution()
+//
+// Parameters: 
+// int a - The leading integer
+// int b - The secondary integer
+// int c - An optional tritary integer
+//
+// Returns:	bool
+//----------------------------------------------------------------------------
 int concatInt(int a, int b, int c)
 {
 	// assuming base 10
@@ -126,7 +232,7 @@ int concatInt(int a, int b, int c)
 
 int main()
 {
-	// Crossing disabled
+	// Run solution with crossing disabled
 	cout << "Solutions with crossing disabled" << endl;
 	for (int num = 0; num < phonepad.size(); num++)
 	{
@@ -134,7 +240,7 @@ int main()
 		solvePuzzle(num, digitsNoCrossing, false);
 	}
 
-	// Crossing enabled
+	// Run solution with crossing enabled
 	cout << endl << "Solutions with crossing enabled" << endl;
 	for (int num = 0; num < phonepad.size(); num++)
 	{
@@ -142,8 +248,9 @@ int main()
 		solvePuzzle(num, digitsCrossing, true);
 	}
 
+	// Pause application
 	cout << endl << "Press <enter> to continue.";
 	cin.ignore(INT_MAX, '\n');
-    return EXIT_SUCCESS;
+	return EXIT_SUCCESS;
 }
 
