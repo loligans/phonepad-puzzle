@@ -34,6 +34,11 @@ const vector<vector<int>> phonepad = {
 // Programmer: Ethan Lindemann-Michael
 // Date: 9/Feb/2018
 // Version: 0.1
+// 
+// Calls: 
+// digitsCross()
+// isSolution()
+// nextDigit()
 //
 // Called By: main()
 //
